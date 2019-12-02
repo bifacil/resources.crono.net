@@ -1,6 +1,6 @@
 ﻿components(
 	name='App-Crono1',
-	[References]=('https://s3.eu-west-1.amazonaws.com/resources.crono.net/components/bootstrap3.cxml')
+	[References]=('https://bifacil.github.io/resources.crono.net/components/bootstrap3.cxml')
 )
 			
 
@@ -17,14 +17,14 @@
 				[HEAD COMPONENTS]
 				
 				_link(href='https://resourcescrono.s3-eu-west-1.amazonaws.com/dashboard-resources/img/favicon.ico', rel='shortcut icon')
-				_link(rel='stylesheet', href='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/css/ultra.css', type='text/css', media='all')
-				_link(rel='stylesheet', href='https://s3.eu-west-1.amazonaws.com/resources.crono.net/css/main.css')
+				_link(rel='stylesheet', href='https://bifacil.github.io/resources.crono.net/ultra/css/ultra.css', type='text/css', media='all')
+				_link(rel='stylesheet', href='https://bifacil.github.io/resources.crono.net/css/main.css')
 				
-				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/file/resizer.js', type='text/javascript', Text='')
-				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/file/jquery-ui.min.js', type='text/javascript', Text='')
-				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/file/jquery.slimscroll.min.js', type='text/javascript', Text='')
-				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/ultra.js', type='text/javascript', Text='')
-				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/js/cronoJS.js', type='text/javascript', Text='')
+				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/file/resizer.js', type='text/javascript', Text='')
+				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/file/jquery-ui.min.js', type='text/javascript', Text='')
+				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/file/jquery.slimscroll.min.js', type='text/javascript', Text='')
+				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/ultra.js', type='text/javascript', Text='')
+				script(src='https://bifacil.github.io/resources.crono.net/js/cronoJS.js', type='text/javascript', Text='')
 				script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
 
 		component(name='document', title='Título predeterminado', description='', ShowHeader=YES)
@@ -46,7 +46,7 @@
 												h1(Text=@title)
 										div
 											[component content]
-					script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/js/init-crono.js', type='text/javascript', Text='')
+					script(src='https://bifacil.github.io/resources.crono.net/js/init-crono.js', type='text/javascript', Text='')
 		
 
 	
