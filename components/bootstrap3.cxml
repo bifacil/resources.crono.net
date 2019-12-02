@@ -1,0 +1,279 @@
+components(Name='Bootstrap 3')
+
+    component(name='HEAD COMPONENTS')
+        meta([http-equiv]='Content-Type', content='text/html; charset=UTF-8')
+        meta([http-equiv]='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        _link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css', integrity='sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==', crossorigin='anonymous')
+        _link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css', integrity='sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX', crossorigin='anonymous')
+        _link(rel='stylesheet', href='https://s3.eu-west-1.amazonaws.com/resources.crono.net/css/bootstrap-callout.css', crossorigin='anonymous')
+                
+        _link(rel='stylesheet', href='https://cdn.rawgit.com/behigh/bootstrap_dropdowns_enhancement/master/dist/css/dropdowns-enhancement.css')
+        _link(rel='stylesheet', href='https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js', Text='')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', Text='')
+        script(src='https://cdn.rawgit.com/behigh/bootstrap_dropdowns_enhancement/master/dist/js/dropdowns-enhancement.js', Text='')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js', Text='')
+        script(src='https://resourcescrono.s3.amazonaws.com/cdn/uvcharts.min.js', Text='')
+        script(src='https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js', Text='')
+        script(src='https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js', Text='')
+
+
+    components(name='Headers')
+        component(name='page header',Text='Page Header') div(class='page-header') h1(Text=@Text)
+        component(name='header 2',Text='Header 2') h2(Text=@Text)
+        component(name='header 3',Text='Header 3') h3(Text=@Text)
+        component(name='header 4',Text='Header 4') h4(Text=@Text)
+
+    components(name='Paragraphs')
+        component(name='paragraph',Type=NULL,Text='') p(class=if(@type IS NOT NULL,$'text-{@type}'), Text=@Text)
+        component(name='primary paragraph',Text='') [paragraph](Type='primary',Text=@Text)
+        component(name='info paragraph',Text='') [paragraph](Type='info',Text=@Text)
+        component(name='warning paragraph',Text='') [paragraph](Type='waring',Text=@Text)
+        component(name='success paragraph',Text='') [paragraph](Type='success',Text=@Text)
+        component(name='danger paragraph',Text='') [paragraph](Type='danger',Text=@Text)
+        component(name='muted paragraph',Text='') [paragraph](Type='muted',Text=@Text)
+      
+    components(name='Links')
+        component(name='link', type=NULL, Text='', href=NULL, target='_self') a(Text=@Text, href=@href, target=@target, class=if(@type is not null, +$'btn btn-{@type}'))
+        component(name='primary link',Text='',href=null, target='_self') link(type='primary', text=@Text, href=@href, target=@target)
+        component(name='info link',Text='',href=null, target='_self') link(type='info', text=@Text, href=@href, target=@target)
+        component(name='warning link',Text='',href=null, target='_self') link(type='warning', text=@Text, href=@href, target=@target)
+        component(name='success link',Text='',href=null, target='_self') link(type='success', text=@Text, href=@href, target=@target)
+        component(name='danger link',Text='',href=null, target='_self') link(type='danger', text=@Text, href=@href, target=@target)
+        component(name='default link',Text='',href=null, target='_self') link(type='default', text=@Text, href=@href, target=@target)
+
+    components(name='Lists')
+        component(name='list') [ul] [component content]
+        component(name='ordered list') [ol] [component content]
+        component(name='list item', text='') li (text=@Text) [component content]
+
+    components(name='Labels')
+        component(name='label',text='',type='danger') span(text=@text,class=if(@type IS NOT NULL,$'label label-{@type}'))
+        component(name='primary label',text='') label (text=@text, type='primary')
+        component(name='success label',text='') label (text=@text, type='success')
+        component(name='info label',text='') label (text=@text, type='info')
+        component(name='warning label',text='') label (text=@text, type='warning')
+        component(name='danger label',text='') label (text=@text, type='danger')
+        component(name='default label',text='') label (text=@text, type='default')
+
+    components(name='Alerts')
+        component(name='alert', Text='alert', type='danger') div(class=if(@type is not null, +$'alert alert-{@type}'), Text=@text)
+        component(name='success alert', Text='alert') alert(type='success', Text=@text)
+        component(name='warning alert', Text='alert') alert(type='warning', Text=@text)
+        component(name='danger alert', Text='alert') alert(type='danger', Text=@text)
+        component(name='info alert', Text='alert') alert(type='info', Text=@text)
+    
+    components(name='Callouts')
+        component(name='callout', Text='callout', type='danger',subtext='') 
+            div(class=if(@type is not null, +$'bs-callout bs-callout-{@type}')) 
+                h4(Text=@text)
+                [if](Condition=+if(@subtext<>'')) span(Text=@subtext)
+        component(name='success callout', Text='callout',subtext='') callout(type='success', Text=@text,subtext=@subtext)
+        component(name='warning callout', Text='callout',subtext='') callout(type='warning', Text=@text,subtext=@subtext)
+        component(name='danger callout', Text='callout',subtext='') callout(type='danger', Text=@text,subtext=@subtext)
+        component(name='info callout', Text='callout',subtext='') callout(type='info', Text=@text,subtext=@subtext)
+    
+    components(name='Action Buttons')
+        component(name='action button',action=NULL, text='',type='default') [form](action=@action, method='post') [_button] (text=@text,type='submit',class=if(@type IS NOT NULL,$'btn btn-{@type}'))
+        component(name='default action button', action=NULL, text='') [action button](type='default',text=@text)
+        component(name='primary action button', action=NULL, text='') [action button](type='primary',text=@text)
+        component(name='info action button', action=NULL, text='') [action button](type='info',text=@text)
+        component(name='warning action button', action=NULL, text='') [action button](type='warning',text=@text)
+        component(name='danger action button', action=NULL, text='') [action button](type='danger',text=@text)
+        component(name='success action button', action=NULL, text='') [action button](type='success',text=@text)
+        component(name='link action button', action=NULL, text='') [action button](type='link',text=@text)
+
+
+    components(name='Buttons')
+        component(name='button',text='',type='default') [_button] (text=@text,type='button',class=if(@type IS NOT NULL,$'btn btn-{@type}'))
+        component(name='default button', text='') [button](type='default',text=@text)
+        component(name='primary button', text='') [button](type='primary',text=@text)
+        component(name='info button', text='') [button](type='info',text=@text)
+        component(name='warning button', text='') [button](type='warning',text=@text)
+        component(name='danger button', text='') [button](type='danger',text=@text)
+        component(name='success button', text='') [button](type='success',text=@text)
+        component(name='link button', text='') [button](type='link',text=@text)
+
+    components(name='Submit Buttons')
+        component(name='submit button',text='',type='primary') [_button] (text=@text,type='submit',class=if(@type IS NOT NULL,$'btn btn-{@type}'))
+        component(name='default submit button', text='') [submit button](type='default',text=@text)
+        component(name='primary submit button', text='') [submit button](type='primary',text=@text)
+        component(name='info submit button', text='') [submit button](type='info',text=@text)
+        component(name='warning submit button', text='') [submit button](type='warning',text=@text)
+        component(name='danger submit button', text='') [submit button](type='danger',text=@text)
+        component(name='success submit button', text='') [submit button](type='success',text=@text)
+        component(name='link submit button', text='') [submit button](type='link',text=@text)
+
+    components(name='Dropdowns')
+        component(name='dropdown', type='default',text='Dropdown',Data=NULL, href=Null, VariableName=null, SelectAllText=null, IsAutomatic=YES)
+            div(class='dropdown', style='display:inline-block')
+                _button(class=if(@type IS NULL,'dropdown-toggle btn btn-default',$'dropdown-toggle btn btn-{@type}'), type='button', [data-toggle]='dropdown', [aria-haspopup]='true', [aria-expanded]='true')
+                  span(Text=@text)
+                  span(class='caret', Text='')
+                ul(class='dropdown-menu')
+                  [If](condition=if(@SelectAllText IS NOT NULL)) [dropdown item](href=@href, text=@SelectAllText, VariableName=@VariableName, [value]=SELECT_ALL)
+                  [if](Condition=if(@Data IS NULL)) [component content]
+                  [if](Condition=if(@Data IS NOT NULL))
+                    [for each](Data=@Data) 
+                      [if](condition=if(@IsAutomatic=YES))[dropdown item](href=@href, text=@text, VariableName=@VariableName, [Value]=@text)
+                      [if](condition=if(@IsAutomatic=NO))[component content]
+                      
+        component(name='primary dropdown',text='Dropdown',Data=NULL, href=Null, VariableName=null, SelectAllText=null, IsAutomatic=YES) dropdown(text=@Text,type='primary',Data=@Data, href=@href, VariableName=@VariableName, SelectAllText=@SelectAllText, IsAutomatic=@IsAutomatic) [component content]
+        component(name='success dropdown',text='Dropdown',Data=NULL, href=Null, VariableName=null, SelectAllText=null, IsAutomatic=YES) dropdown(text=@Text,type='success',Data=@Data, href=@href, VariableName=@VariableName, SelectAllText=@SelectAllText, IsAutomatic=@IsAutomatic) [component content]
+        component(name='info dropdown',text='Dropdown',Data=NULL, href=Null, VariableName=null, SelectAllText=null, IsAutomatic=YES) dropdown(text=@Text,type='info',Data=@Data, href=@href, VariableName=@VariableName, SelectAllText=@SelectAllText, IsAutomatic=@IsAutomatic) [component content]
+        component(name='warning dropdown',text='Dropdown',Data=NULL, href=Null, VariableName=null, SelectAllText=null, IsAutomatic=YES) dropdown(text=@Text,type='warning',Data=@Data, href=@href, VariableName=@VariableName, SelectAllText=@SelectAllText, IsAutomatic=@IsAutomatic) [component content]
+        component(name='danger dropdown',text='Dropdown',Data=NULL, href=Null, VariableName=null, SelectAllText=null, IsAutomatic=YES) dropdown(text=@Text,type='danger',Data=@Data, href=@href, VariableName=@VariableName, SelectAllText=@SelectAllText, IsAutomatic=@IsAutomatic) [component content]
+        component(name='dropdown item', href=null, Text=null, VariableName=null, [Value]=Null) li a(href=@href, Text=@Text, [data-variable]=@VariableName, [data-value]=@value)
+    components(name='Panels')
+        component(name='panel',text='Panel header',type='default')
+            div(class=if(@type IS NOT NULL,$'panel panel-{@type}'))
+                div(class='panel-heading')
+                    h3(class='panel-title', Text=@Text)
+                div(class='panel-body')
+                    [component content]
+        component(name='primary panel',text='Panel header') panel(text=@text,type='primary') [component content]
+        component(name='info panel',text='Panel header') panel(text=@text,type='info') [component content]
+        component(name='success panel',text='Panel header') panel(text=@text,type='success') [component content]
+        component(name='warning panel',text='Panel header') panel(text=@text,type='warning') [component content]
+        component(name='danger panel',text='Panel header') panel(text=@text,type='danger') [component content]
+        component(name='default panel',text='Panel header') panel(text=@text,type='default') [component content]
+    
+    
+    components(name='Tabs')
+        component(name='tabs')
+            div
+                ul(class=+$'nav nav-tabs') [component content](name='tab items')
+                div(class='tab-content') [component content](name='tab contents')
+    
+        component(name='pills')
+            div
+                ul(class='nav nav-pills') [component content](name='tab items')
+                div(class='tab-content') [component content](name='tab contents')
+        
+        component(name='tab item',href='#tab1',Text='Tab item',IsActive=NO) li(class=if(@IsActive,'active')) a([data-toggle]='pill', href=@href, Text=@Text)
+        component(name='tab content base', id='tab1',IsActive=NO) div(class=if(@IsActive,'tab-pane fade in active','tab-pane fade'), id=@id) [component content]
+        component(name='tab content', id='tab1',IsActive=NO) [tab content base] (id=@id, IsActive=@IsActive) [component content]
+        component(name='tab content ajax', id='tab1',IsActive=NO, href='') 
+            [tab content base] (id=@id, IsActive=@IsActive, [data-tab-id]=@id, [data-href]=@href)
+            script(Text=concat('$(document).ready(function() {', CHAR(10), '$("[href=#', @id, ']").on("show.bs.tab", function(e) {', CHAR(10), 'var body = $("#', @id, '"); if(body.html() ==""){ShowOverlay(body); body.load(body.attr("data-href"), function(){InitializeDocument();RemoveOverlay(body);});}});});'))
+    
+    
+    components(name='Modals')
+        component(name='modal',text='Modal', title='Title',type='',AutomaticId=YES)
+            _button(type='button', [data-toggle]='modal', class='btn btn-primary', [data-target]=concat('#',@id), Text=@text)
+            div(class='modal fade', role='dialog', id=@id)
+                div(class=if(type='','modal-dialog', concat('modal-dialog modal-',@type)))
+                    div(Class='modal-content')
+                        div(class='modal-header')
+                            _button(type='button', class='close', [data-dismiss]='modal', Text='x')
+                            h4(class='modal-title', Text=@title)
+                        div(class='modal-body')
+                            [component content]
+    
+        component(name='modal small',text='Modal', title='Title',id='') modal(text=@text,title=@title,type='sm',id=@id) [component content]
+        component(name='modal large',text='Modal', title='Title',id='') modal(text=@text,title=@title,type='lg',id=@id) [component content]
+        component(name='modal ajax',text='Modal', title='Title',type='', ButtonType='primary', AutomaticId=YES, href='')
+              _button(type='button', [data-toggle]='modal', class=$'btn btn-{@buttonType}', [data-target]=concat('#',@id), Text=@text)
+              div(class='modal fade', role='dialog', id=@id, [data-href]=@href)
+                  div(class=if(type='','modal-dialog', concat('modal-dialog modal-',@type)))
+                      div(Class='modal-content')
+                          div(class='modal-header')
+                              _button(type='button', class='close', [data-dismiss]='modal', Text='x')
+                              h4(class='modal-title', Text=@title)
+                          div(class='modal-body', style='min-height:200px;')
+              script(Text=concat('$(document).ready(function() {$("#', @id, '").on("show.bs.modal", function(e) {var body = $(this).find(".modal-body"); if(body.html() ==""){ShowOverlay(body); var href = $(this).attr("data-href");$(this).find(".modal-body").load(href, function(){RemoveOverlay(body)});}});});'))
+    components(name='Tables')
+        component(name='table responsive', Data=NULL)
+            div(class='table-responsive')
+                [table](class='table', Data=@Data)
+                  [component content]
+    
+        component(name='data table', Data=NULL, Search=NO,AutomaticID=YES)
+                div(class='table-responsive')
+                    [table](class='table',id=@id, Data=@Data)
+                      [component content]
+                    script(Text=concat('$(document).ready(function() {$("#',@id,'").DataTable({ "paging": false, "info": false, "ordering": true, "order": [], "searching": ', if(@Search=YES, 'true', 'false'),' });});'))
+                    
+        component(name='panel table',text='Title',Data=NULL, type='success')
+            div(class=$'panel panel-{@type}')
+              div(class='panel-heading')
+                h3(class='panel-title', Text=@Text)
+              [data table](Data=@Data) [component content]
+    
+    components(name='Formularys')
+        component(name='formulary', action='') form(role='form', method='post', action=@action) [component content]
+        component(name='form label',Text='Title') _label(Text=@Text) 
+        component(name='input text',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
+            div(class='form-group')
+                [if](condition=if(@Text is not null))
+                    [form label](Text=@Text)
+                input(class='form-control', type='text', name=@VariableName,[value]=@Value,placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
+
+        component(name='input number',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL, Step='1',IsDisabled=NO,IsReadOnly=NO) 
+            div(class='form-group')           
+                [if](condition=if(@Text is not null))
+                    [form label](Text=@Text)
+                input(class='form-control', type='number', name=@VariableName,[value]=@Value, step=@Step, placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
+		
+        component(name='input date',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
+            div(class='form-group')           
+                [if](condition=if(@Text is not null))
+                    [form label](Text=@Text)
+                input(class='form-control', type='date', name=@VariableName,[value]=@Value,placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
+				
+        component(name='input datetime-local',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
+            div(class='form-group')           
+                [if](condition=if(@Text is not null))
+                    [form label](Text=@Text)
+                input(class='form-control', type='datetime-local', name=@VariableName,[value]=@Value,placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
+				
+        component(name='input hidden',VariableName=NULL,[Value]=NULL) input(type='hidden',name=@VariableName,  [value]=@Value,Text='')
+    
+        component(name='input select',Text='label text',type='text', VariableName=NULL, style=null)
+            div(class='form-group')
+              [if](condition=if(@Text is not null)) 
+                [form label](Text=@Text)
+              [select](class='form-control', type=@type, name=@VariableName, style=@style)
+                [component content]
+        
+        component(name='input option',  [value]='value', SelectedValue=NULL)
+            [option]([Value]=@Value, Selected=if(SelectedValue=@Value, 'selected'))
+    
+        component(Name='input checkbox',VariableName=@VariableName,[Value]=NULL,IsChecked=NO,IsDisabled=NO,Text='Checkbox')
+            div(class='checkbox')
+              _label
+                input(type='checkbox', name=@VariableName,[value]=@Value,Text='',checked=if(@IsChecked,'checked'),disabled=if(IsDisabled,'disabled'))
+                span(Text=@Text)
+				
+        component(Name='input radio',VariableName=@VariableName,[Value]=NULL,IsChecked=NO,IsDisabled=NO,Text='Radio')
+            div(class='checkbox')
+              _label
+                input(type='radio', name=@VariableName,[value]=@Value,Text='',checked=if(@IsChecked,'checked'),disabled=if(IsDisabled,'disabled'))
+                span(Text=@Text)
+        
+        component(name='input file',VariableName=@VariableName,Text='Select file')
+            div(class='form-group')
+                [if](condition=if(@Text is not null))
+                    [form label](Text=@Text)
+                input(class='btn btn-default', type='file', accept='image/*', capture='camera', name=@VariableName)
+				
+        component(name='input file primary',VariableName=@VariableName,Text='Select file')
+            div(class='form-group')
+                [if](condition=if(@Text is not null))
+                    [form label](Text=@Text)
+                input(class='btn btn-primary', type='file', accept='image/*', capture='camera', name=@VariableName)
+        
+    
+    components(name='Grid')
+        component(name='grid row') div(class='row') [component content]
+        component(name='grid column 1') div(class='col col-md-1 col-sm-10') [component content]
+        component(name='grid column 2') div(class='col col-md-2 col-sm-10') [component content]
+        component(name='grid column 3') div(class='col col-md-3 col-sm-10') [component content]
+        component(name='grid column 4') div(class='col col-md-4') [component content]
+        component(name='grid column 5') div(class='col col-md-5') [component content]
+        component(name='grid column 6') div(class='col col-md-6 col-sm-12') [component content]
+        component(name='grid column 8') div(class='col col-md-8 col-sm-12') [component content]
+        component(name='grid column 9') div(class='col col-md-9 col-sm-12') [component content]
+        component(name='grid column 12') div(class='col col-md-12 col-sm-12') [component content]
+        

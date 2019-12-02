@@ -1,0 +1,118 @@
+﻿components(
+	name='App-Crono1',
+	[References]=('https://s3.eu-west-1.amazonaws.com/resources.crono.net/components/bootstrap3.cxml')
+)
+			
+
+			
+	components(name='html')
+		component(name='app head')
+			head
+				title(Text=@title)
+				meta(name='title', content=@title)
+				meta(name='application-name', content='Crono Web')
+				[if](condition=if(@description <> ''))
+					meta(name='description', content=@description)
+				
+				[HEAD COMPONENTS]
+				
+				_link(href='https://resourcescrono.s3-eu-west-1.amazonaws.com/dashboard-resources/img/favicon.ico', rel='shortcut icon')
+				_link(rel='stylesheet', href='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/css/ultra.css', type='text/css', media='all')
+				_link(rel='stylesheet', href='https://s3.eu-west-1.amazonaws.com/resources.crono.net/css/main.css')
+				
+				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/file/resizer.js', type='text/javascript', Text='')
+				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/file/jquery-ui.min.js', type='text/javascript', Text='')
+				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/file/jquery.slimscroll.min.js', type='text/javascript', Text='')
+				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/ultra/js/ultra.js', type='text/javascript', Text='')
+				script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/js/cronoJS.js', type='text/javascript', Text='')
+				script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+
+		component(name='document', title='Título predeterminado', description='', ShowHeader=YES)
+			html
+				[app head]
+				body(class='app', TargetID='content')
+					span(text=@CurrentUser, style='top:0;right:0;position:absolute;z-index:1;')
+					div(id='u-app-wrapper', class='collapse-true')
+						[menu]
+						
+						
+						div(class='content-wrapper')
+							hr(id='anchor-point')
+							div(class='container-fluid content-shrink')
+								div(class='row')
+									div(id='content', class='content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0')
+										[If](condition=if(@ShowHeader))
+											div(class='page-header')
+												h1(Text=@title)
+										div
+											[component content]
+					script(src='https://s3.eu-west-1.amazonaws.com/resources.crono.net/js/init-crono.js', type='text/javascript', Text='')
+		
+
+	
+	components(name='Menú')
+		component(name='left menu')
+			div(id='u-topbar')
+				div(class='title')
+					img(src='https://resourcescrono.s3.amazonaws.com/dashboard-resources/img/logo-crono-min.png', alt='CRONO')
+				span(class='left-panel-toggle')
+					span(class='glyphicon glyphicon-menu-hamburger', Text='')
+			div(id='u-left-panel', [data-generationtime]='344')
+				div(class='panel-user-wrapper style1')
+					img(src='https://resourcescrono.s3.amazonaws.com/dashboard-resources/img/logo-crono.png', alt='CRONO')
+				div(class='panel-user-wrapper style1 min')
+					img(src='https://resourcescrono.s3.amazonaws.com/dashboard-resources/img/logo-crono-ultramin.png', alt='CRONO')
+				span(class='left-panel-toggle')
+					span(class='glyphicon glyphicon-menu-hamburger', Text='')
+				div(id='u-left-menu')
+					ul(class='left-menu-wrapper list-unstyled')
+						[component content]
+						
+		component(name='menu home item', caption='INICIO', href='#')
+			li(class='left-menu-parent left-menu-active')
+				a(href=@href)
+					span(class='left-menu-link-icon')
+						span(class='glyphicon glyphicon-home', Text='')
+					span(class='left-menu-link-info')
+						span(class='link-name', Text=@caption)
+						
+		component(name='menu item', caption='Caption', href='#')
+			li(class='left-menu-parent')
+				a(href=@href)
+					span(class='left-menu-link-icon')
+						span(class='glyphicon glyphicon-file', Text='')
+					span(class='left-menu-link-info')
+						span(class='link-name', Text=@caption)
+						span(class='link-state', Text='')
+		
+		component(name='menu item desplegable', caption='Caption', href='#')
+			li(class='left-menu-parent')
+				a(class='active-state', href=@href)
+					span(class='left-menu-link-icon')
+						span(class='glyphicon glyphicon-folder-close', Text='')
+					span(class='left-menu-link-info')
+						span(class='link-name', Text=@caption)
+						span(class='link-state', Text='')
+				ul(class='list-unstyled left-menu-sub', style='display: block;')
+					[component content]
+				  
+		component(name='submenu item', caption='Caption', href='#')
+			[accesible content](href=@href)
+				li
+					a(href=@href)
+						span(class='left-menu-link-info')
+							span(class='link-name', Text=@caption)
+							span(class='link-state', Text='')
+					
+	components(name='Home')
+		component(name='home section', caption='Caption')
+			h2(Text=@caption)
+			div(class='row')
+				[component content]
+						
+		component(name='home button', href='#', Text='', img='', buttonType='primary')
+			div(class='col col-md-4 col-sm-4 col-xs-12 home-button')
+				h3
+					a(class=$'btn btn-{buttonType}', href=@href)
+						img(src=@img, class='img-responsive')
+						span(Text=@text)
