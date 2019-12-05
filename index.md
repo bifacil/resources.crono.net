@@ -7,4 +7,5 @@ Se comparten los siguientes recursos:
 - Datatables: https://bifacil.github.io/resources.crono.net/datatables/info.md
 - Behigh Bootstrap Dropdown Enhancement: https://bifacil.github.io/resources.crono.net/behigh-bs-enhancement/info.md
 - KnockoutJS https://bifacil.github.io/resources.crono.net/knockout/info.md
+- Bootstrap Select https://bifacil.github.io/resources.crono.net/bootstrap-select/info.md
 
