@@ -20,6 +20,7 @@
 				_link(rel='stylesheet', href='https://bifacil.github.io/resources.crono.net/ultra/css/ultra.css', type='text/css', media='all')
 				_link(rel='stylesheet', href='https://bifacil.github.io/resources.crono.net/css/main.css')
 				
+				script(src='https://bifacil.github.io/resources.crono.net/knockout/3.2.0/knockout.js', type='text/javascript', Text='')
 				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/file/resizer.js', type='text/javascript', Text='')
 				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/file/jquery-ui.min.js', type='text/javascript', Text='')
 				script(src='https://bifacil.github.io/resources.crono.net/ultra/js/file/jquery.slimscroll.min.js', type='text/javascript', Text='')
