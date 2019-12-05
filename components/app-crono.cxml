@@ -57,7 +57,7 @@
 					img(src='https://bifacil.github.io/resources.crono.net/img/logo-crono-min.png', alt='CRONO')
 				span(class='left-panel-toggle')
 					span(class='glyphicon glyphicon-menu-hamburger', Text='')
-			div(id='u-left-panel', [data-generationtime]='344')
+			div(id='u-left-panel')
 				div(class='panel-user-wrapper style1')
 					img(src='https://bifacil.github.io/resources.crono.net/img/logo-crono.png', alt='CRONO')
 				div(class='panel-user-wrapper style1 min')
