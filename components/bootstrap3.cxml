@@ -202,27 +202,28 @@ components(Name='Bootstrap 3')
     
     components(name='Formularys')
         component(name='formulary', action='') form(role='form', method='post', action=@action) [component content]
+        component(name='form group') div(class='form-group') [component content]
         component(name='form label',Text='Title') _label(Text=@Text) 
         component(name='input text',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
-            div(class='form-group')
+            [form group]
                 [if](condition=if(@Text is not null))
                     [form label](Text=@Text)
                 input(class='form-control', type='text', name=@VariableName,[value]=@Value,placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
 
         component(name='input number',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL, Step='1',IsDisabled=NO,IsReadOnly=NO) 
-            div(class='form-group')           
+            [form group]
                 [if](condition=if(@Text is not null))
                     [form label](Text=@Text)
                 input(class='form-control', type='number', name=@VariableName,[value]=@Value, step=@Step, placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
 		
         component(name='input date',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
-            div(class='form-group')           
+            [form group]
                 [if](condition=if(@Text is not null))
                     [form label](Text=@Text)
                 input(class='form-control', type='date', name=@VariableName,[value]=@Value,placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
 				
         component(name='input datetime-local',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
-            div(class='form-group')           
+            [form group] 
                 [if](condition=if(@Text is not null))
                     [form label](Text=@Text)
                 input(class='form-control', type='datetime-local', name=@VariableName,[value]=@Value,placeholder=@placeholder,disabled=if(IsDisabled,'disabled'),readonly=if(IsReadOnly,'readonly'))
@@ -230,7 +231,7 @@ components(Name='Bootstrap 3')
         component(name='input hidden',VariableName=NULL,[Value]=NULL) input(type='hidden',name=@VariableName,  [value]=@Value,Text='')
     
         component(name='input select',Text='label text',type='text', VariableName=NULL, style=null)
-            div(class='form-group')
+            [form group]
               [if](condition=if(@Text is not null)) 
                 [form label](Text=@Text)
               [select](class='form-control', type=@type, name=@VariableName, style=@style)
@@ -252,17 +253,29 @@ components(Name='Bootstrap 3')
                 span(Text=@Text)
         
         component(name='input file',VariableName=@VariableName,Text='Select file')
-            div(class='form-group')
+            [form group]
                 [if](condition=if(@Text is not null))
                     [form label](Text=@Text)
                 input(class='btn btn-default', type='file', accept='image/*', capture='camera', name=@VariableName)
 				
         component(name='input file primary',VariableName=@VariableName,Text='Select file')
-            div(class='form-group')
+            [form group]
                 [if](condition=if(@Text is not null))
                     [form label](Text=@Text)
                 input(class='btn btn-primary', type='file', accept='image/*', capture='camera', name=@VariableName)
-        
+
+                
+	
+    components(name='Pickers')
+        component(name='picker',text='',type='default', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [select] (class='selectpicker', name=@VariableName, text=@text,type='button',[data-style]=if(@type IS NOT NULL,$'btn-{@type}'), [data-live-search]=if(IsSearchable=YES, 'true', 'false'), [multiple]=if(Multiple=YES, 'true'), [disabled]=if(IsDisabled=YES, 'disabled'), title=@Placeholder) [component content]
+        component(name='default picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='default')  [component content]
+        component(name='primary picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='primary') [component content]
+        component(name='info picker',    text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='info') [component content]
+        component(name='warning picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='warning') [component content]
+        component(name='danger picker',  text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='danger') [component content]
+        component(name='success picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='success') [component content]
+        component(name='link picker',    text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='link') [component content]
+                        
     
     components(name='Grid')
         component(name='grid row') div(class='row') [component content]
