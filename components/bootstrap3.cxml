@@ -230,11 +230,11 @@ components(Name='Bootstrap 3')
 				
         component(name='input hidden',VariableName=NULL,[Value]=NULL) input(type='hidden',name=@VariableName,  [value]=@Value,Text='')
     
-        component(name='input select',Text='label text',type='text', VariableName=NULL, style=null)
+        component(name='input select',Text='label text',type='text', VariableName=NULL, style=null, [Value]=NULL, [Data]=NULL)
             [form group]
               [if](condition=if(@Text is not null)) 
                 [form label](Text=@Text)
-              [select](class='form-control', type=@type, name=@VariableName, style=@style)
+              [select](class='form-control', type=@type, name=@VariableName, style=@style, [Value]=@Value, [Data]=@Data, IsTargetForAttributes=YES)
                 [component content]
         
         component(name='input option',  [value]='value', SelectedValue=NULL)
@@ -267,14 +267,14 @@ components(Name='Bootstrap 3')
                 
 	
     components(name='Pickers')
-        component(name='picker',text='',type='default', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [select] (class='selectpicker', name=@VariableName, text=@text,type='button',[data-style]=if(@type IS NOT NULL,$'btn-{@type}'), [data-live-search]=if(IsSearchable=YES, 'true', 'false'), [multiple]=if(Multiple=YES, 'true'), [disabled]=if(IsDisabled=YES, 'disabled'), title=@Placeholder) [component content]
-        component(name='default picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='default')  [component content]
-        component(name='primary picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='primary') [component content]
-        component(name='info picker',    text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='info') [component content]
-        component(name='warning picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='warning') [component content]
-        component(name='danger picker',  text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='danger') [component content]
-        component(name='success picker', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='success') [component content]
-        component(name='link picker',    text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,type='link') [component content]
+        component(name='picker', type='default', text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [select] (class='selectpicker', name=@VariableName, text=@text,type='button',[data-style]=if(@type IS NOT NULL,$'btn-{@type}'), [data-live-search]=if(IsSearchable=YES, 'true', 'false'), [multiple]=if(Multiple=YES, 'true'), [disabled]=if(IsDisabled=YES, 'disabled'), title=@Placeholder, [Value]=@Value, [Data]=@Data) [component content]
+        component(name='default picker',         text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='default')  [component content]
+        component(name='primary picker',         text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='primary') [component content]
+        component(name='info picker',            text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='info') [component content]
+        component(name='warning picker',         text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='warning') [component content]
+        component(name='danger picker',          text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='danger') [component content]
+        component(name='success picker',         text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='success') [component content]
+        component(name='link picker',            text='', VariableName=NULL, IsSearchable=NO, Multiple=NO, IsDisabled=NO, Placeholder=NULL,[Value]=NULL, [Data]=NULL) [picker](IsSearchable=@IsSearchable,Multiple=@Multiple,IsDisabled=@IsDisabled,Placeholder=@Placeholder, text=@text,[Value]=@Value, [Data]=@Data, type='link') [component content]
                         
     
     components(name='Grid')
