@@ -170,6 +170,7 @@ components(Name='Bootstrap 3')
                         div(class='modal-body')
                             [component content]
     
+        component(name='modal footer') [transform](type='moveup', selector='.modal-content') div(class='modal-footer') [component content]
         component(name='modal small',text='Modal', title='Title',id='') modal(text=@text,title=@title,type='sm',id=@id,IsTargetForAttributes=YES) [component content]
         component(name='modal large',text='Modal', title='Title',id='') modal(text=@text,title=@title,type='lg',id=@id,IsTargetForAttributes=YES) [component content]
         component(name='modal ajax',text='Modal', title='Title',type='', ButtonType='primary', AutomaticId=YES, href='')
