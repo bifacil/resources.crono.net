@@ -52,7 +52,7 @@
 
 	
 	components(name='Menú')
-		component(name='selector', componentType='knockout', [File]='https://bifacil.github.io/resources.crono.net/components/filter.html')
+		component(name='selector', componentType='knockout', [File]='https://bifacil.github.io/resources.crono.net/components/selector.html')
 		component(name='left menu')
 			div(id='u-topbar')
 				div(class='title')
