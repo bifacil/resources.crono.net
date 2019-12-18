@@ -14,7 +14,8 @@ $(document).ready(InitializeDocument);
 function InitializeDocument(){
 	InitAjaxLinks();
 	DisableSubmitButtonsAfterSubmit();
-	InitCronoSqlForms();
+    InitCronoSqlForms();
+    $('select.selectpicker').selectpicker();
 }
 var actionAttribute = "[data-action=true]";
 function InitCronoSqlForms(){
