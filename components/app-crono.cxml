@@ -28,6 +28,10 @@
 				script(src='https://bifacil.github.io/resources.crono.net/js/cronoJS.js', type='text/javascript', Text='')
 				script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
 
+				script(type='text/javascript', src='?resourcesjs')
+				[_link](rel='stylesheet', href='?resourcescss')
+				script(src='https://cdn.jsdelivr.net/npm/dual-listbox/dist/dual-listbox.min.js')
+
 		component(name='document', title='Título predeterminado', description='', ShowHeader=YES)
 			html
 				[app head]
