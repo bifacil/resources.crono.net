@@ -1,6 +1,6 @@
 <template>
-    <a data-toggle="modal" class="btn btn-primary lavel-item" data-bind="text: displayStr, attr: {href: '#modal_' + kind()}"></a>
-    <div class="modal fade" role="dialog" data-bind="attr: {id: 'modal_' + kind()}">
+    <a data-toggle="modal" class="btn btn-primary lavel-item" data-bind="text: displayStr, attr: {href: modalHref}"></a>
+    <div class="modal fade" role="dialog" data-bind="attr: {id: modalId}">
         <div class="modal-dialog modal-lg">
         <div Class="modal-content">
             <div class="modal-header">
@@ -10,28 +10,28 @@
             <div class="modal-body">
             <ul class="nav nav-pills">
                 <li class="active">
-                <a data-toggle="pill" data-bind="attr: {href: '#single_' + kind()}">Selección simple</a>
+                <a data-toggle="pill" data-bind="attr: {href: singleTabHref}">Selección simple</a>
                 </li>
                 <li>
-                <a data-toggle="pill" data-bind="attr: {href: '#multi_' + kind()}">Selección múltiple</a>
+                <a data-toggle="pill" data-bind="attr: {href: multiTabHref}">Selección múltiple</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade in active" data-bind="attr: {id: 'single_' + kind()}">
+                <div class="tab-pane fade in active" data-bind="attr: {id: singleTabId}">\
                     <div class="form-group dual-listbox">
                         <label>Valor:</label>
-                        <input type="text" class="dual-listbox__search" placeholder="Type name directly" data-bind="value: freeText" />
+                        <input type="text" class="dual-listbox__search" placeholder="Type name directly" data-bind="value: freeText"/>
                     </div>
                     <div class="form-group dual-listbox">
                         <label>Lista de valores:</label>
-                        <input type="text" class="dual-listbox__search mb-5" placeholder="Search" id="search-input" data-bind="value: searchQuery, valueUpdate: 'keyup'" />
-                        <ul class="dual-listbox__available list-array" data-bind="foreach: itemList">
-                            <li class="dual-listbox__item" data-bind="text: $data, click: function() { $parent.selectItem(event);}"></li>
+                        <input type="text" class="dual-listbox__search mb-5" placeholder="Search" id="search-input" data-bind="value: searchQuery, valueUpdate: keyup"/>
+                        <ul class="dual-listbox__available list-array single-selection" data-bind="foreach: itemList">
+                            <li class="dual-listbox__item" data-bind="text: text, click: function() { $parent.selectItem(event);}"></li>
                         </ul>
                     </div>
                 </div>
-                <div class="tab-pane fade" data-bind="attr: {id: 'multi_' + kind()}">
-                    <select data-bind="attr: {id: 'multi' + kind() + 'Select'}, options: itemList, dualEditoralList: { selected: Selected }" multiple="multiple" >
+                <div class="tab-pane fade" data-bind="attr: {id: multiTabId}">
+                    <select data-bind="attr: {id: dualSelectId}, options: dualItems, dualItemList: { selected: Selected }" multiple="multiple">
                     </select>
                 </div>
             </div>
@@ -43,8 +43,6 @@
         </div>
         </div>
     </div>
-    
-
 
 </template>
 
@@ -54,14 +52,34 @@
 
 <script>
 
-
 function(params) {
-    this.itemList = ko.observableArray(params.value);
-    this.kind = ko.observable(params.kind);
+    
+    let keys = Object.keys(params.options[0])
+    let formattedList = [];
 
-    this.displayStr = ko.observable(params.basicVal);
-    this.freeText = ko.observable(params.basicVal);
+    if (!params.optionsValue) params.optionsValue=keys[0];
+    if (!params.optionsText) params.optionsText=keys[keys.length-1];
+    formattedList = params.options.map(i => ({ id: i[params.optionsValue], text: i[params.optionsText]}));
+
+
+    this.dualItems = ko.observableArray(formattedList.map(i => (i['text'])));
+
+    this.itemList = ko.observableArray(formattedList);
+    this.uniqueID = ko.observable(Math.floor(Math.random() * 100));
+
+    this.modalId = "modal_" + this.uniqueID();
+    this.modalHref = "#" + this.modalId;
+    this.singleTabId = "single_" + this.uniqueID();
+    this.singleTabHref = "#" + this.singleTabId;
+    this.multiTabId = "multi_" + this.uniqueID();
+    this.multiTabHref = "#" + this.multiTabId;
+    this.dualSelectId = "multi" + this.uniqueID() + "Select";
+    this.keyup = 'keyup';
+
+    this.displayStr = ko.observable();
+    this.freeText = ko.observable();
     this.searchQuery = ko.observable();
+    this.selectedOptions= params.selectedOptions;
 
     this.selectItem = function(event) {
         var searchItems = jQuery(".list-array").children();
@@ -80,7 +98,7 @@ function(params) {
 
     this.searchQuery.subscribe(function(el) {
         self.itemList(tempList.filter(function(item) {
-            if (item.toUpperCase().indexOf(el.toUpperCase()) > -1)  return true;
+            if ((item['text']).toString().toUpperCase().indexOf(el.toUpperCase()) > -1)  return true;
             else return false;
         }));
     });
@@ -113,13 +131,29 @@ function(params) {
     this.setValues = function (componentList) {
         var displayArray = [];
         var displayStr = "";
+        var self = this;
 
-        if (jQuery("#single_" + this.kind()).attr('class').includes("active")) {
+        if (jQuery(this.singleTabHref).attr('class').includes("active")) {
             displayStr = this.freeText();
-            displayArray.push(this.freeText());
+
+            let findItem = formattedList.find(function(el) {
+                return el.text == self.freeText();
+            });
+
+            if (findItem)
+                displayArray.push(findItem['id']);
+            else
+                displayArray.push(this.freeText());
+
         } else {
             for (var i = 0; i < componentList.list.length; i ++) {
-                displayArray.push(componentList.list[i]);
+
+                let findItem = formattedList.find(function(el) {
+                    return el.text == componentList.list[i];
+                });
+    
+                if (findItem)
+                    displayArray.push(findItem['id']);
 
                 if (componentList.list.length - 1 == i) {
                     displayStr += componentList.list[i];
@@ -139,13 +173,30 @@ function(params) {
         list: []
     };
 
-    ko.bindingHandlers.dualEditoralList = this.initDualList('#multi' + this.kind() + 'Select', selectedItems);
+    ko.bindingHandlers.dualItemList = this.initDualList('#' + this.dualSelectId, selectedItems);
+
+    let initialStr = '';
+    let selOpts = params.selectedOptions();
+
+    for (let i = 0; i < selOpts.length; i ++) {
+        let findItem = formattedList.find(function(el) {
+            return el.id == selOpts[i];
+        });
+
+        if (selOpts.length - 1 == i) {
+            initialStr += findItem['text'];
+        } else {
+            initialStr += findItem['text'] + ", ";
+        }
+    }
+
+    this.displayStr(initialStr);
 
     this.acceptValue = function() {
         var values = this.setValues(selectedItems);
         this.displayStr(values.str);
 
-        params.selectedValues(values.array);
+        this.selectedOptions(values.array);
     }
 }
 
@@ -171,7 +222,6 @@ function(params) {
 
 
 <style>
-
 @media (min-width: 992px) {
     .modal-lg {
         width: 712px !important;
@@ -233,6 +283,11 @@ input {
     margin-top:0;
     -webkit-margin-before:0
 }
+
+.single-selection {
+    height: 237px !important;
+}
+
 .dual-listbox .dual-listbox__buttons{
     display:-webkit-box;
     display:flex;
