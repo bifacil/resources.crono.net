@@ -1,5 +1,5 @@
 <template>
-    <a data-toggle="modal" class="btn btn-primary lavel-item" data-bind="text: displayStr, attr: {href: modalHref}"></a>
+    <a data-toggle="modal" class="btn btn-primary lavel-item" data-bind="text: displayStr, attr: {href: modalHref}, click: initialDialog"></a>
     <div class="modal fade" role="dialog" data-bind="attr: {id: modalId}">
         <div class="modal-dialog modal-lg">
         <div Class="modal-content">
@@ -17,21 +17,22 @@
                 </li>
             </ul>
             <div class="tab-content">
-                <div class="tab-pane fade in active" data-bind="attr: {id: singleTabId}">\
+                <div class="tab-pane fade in active" data-bind="attr: {id: singleTabId}">
                     <div class="form-group dual-listbox">
                         <label>Valor:</label>
-                        <input type="text" class="dual-listbox__search" placeholder="Type name directly" data-bind="value: freeText"/>
+                        <input type="text" class="dual-listbox__search" placeholder="Type name directly" data-bind="value: freeText" />
                     </div>
                     <div class="form-group dual-listbox">
                         <label>Lista de valores:</label>
-                        <input type="text" class="dual-listbox__search mb-5" placeholder="Search" id="search-input" data-bind="value: searchQuery, valueUpdate: keyup"/>
+                        <input type="text" class="dual-listbox__search mb-5" placeholder="Search" id="search-input" data-bind="value: searchQuery, valueUpdate: keyup" />
                         <ul class="dual-listbox__available list-array single-selection" data-bind="foreach: itemList">
                             <li class="dual-listbox__item" data-bind="text: text, click: function() { $parent.selectItem(event);}"></li>
                         </ul>
                     </div>
                 </div>
                 <div class="tab-pane fade" data-bind="attr: {id: multiTabId}">
-                    <select data-bind="attr: {id: dualSelectId}, options: dualItems, dualItemList: { selected: Selected }" multiple="multiple">
+                    <select data-bind="attr: {id: dualSelectId}, foreach: chosenItems, dualItemList: { selected: Selected }" multiple="multiple">
+                      <option data-bind="text: text, attr: {selected: selected}"></option>
                     </select>
                 </div>
             </div>
@@ -61,9 +62,6 @@ function(params) {
     if (!params.optionsText) params.optionsText=keys[keys.length-1];
     formattedList = params.options.map(i => ({ id: i[params.optionsValue], text: i[params.optionsText]}));
 
-
-    this.dualItems = ko.observableArray(formattedList.map(i => (i['text'])));
-
     this.itemList = ko.observableArray(formattedList);
     this.uniqueID = ko.observable(Math.floor(Math.random() * 100));
 
@@ -81,15 +79,21 @@ function(params) {
     this.searchQuery = ko.observable();
     this.selectedOptions= params.selectedOptions;
 
+    let initialIds = params.selectedOptions();
+    let isSelected=function(id){ return initialIds.includes(id);}
+    let options = formattedList.map(i => ({ text: i['text'], value: i['id'], selected: isSelected(i['id'])}));
+    let firstSelected=options.find(function(option) { return option['selected']==true;})
+    if (firstSelected) this.freeText(firstSelected['text']);
+    let selectedItems = {
+        list: options.filter((option) => option.selected==true).map((option) => option.text)
+    };
+    this.chosenItems = options;
+
+
     this.selectItem = function(event) {
-        var searchItems = jQuery(".list-array").children();
-
-        for (var i = 0; i < searchItems.length; i ++) {
-            jQuery(searchItems[i]).removeClass('dual-listbox__item--selected');
-        }
-
+        var searchItems = Array.from(jQuery(".list-array").children());
+        searchItems.forEach((item) => jQuery(item).removeClass('dual-listbox__item--selected'))
         jQuery(event.target).addClass("dual-listbox__item--selected");
-
         this.freeText(jQuery(event.target).text());
     }
 
@@ -98,8 +102,7 @@ function(params) {
 
     this.searchQuery.subscribe(function(el) {
         self.itemList(tempList.filter(function(item) {
-            if ((item['text']).toString().toUpperCase().indexOf(el.toUpperCase()) > -1)  return true;
-            else return false;
+            return ((item['text']).toString().toUpperCase().indexOf(el.toUpperCase()) > -1)  ;
         }));
     });
 
@@ -132,8 +135,8 @@ function(params) {
         var displayArray = [];
         var displayStr = "";
         var self = this;
-
-        if (jQuery(this.singleTabHref).attr('class').includes("active")) {
+        var isSingleSelectionMode=jQuery(this.singleTabHref).attr('class').includes("active");
+        if (isSingleSelectionMode) {
             displayStr = this.freeText();
 
             let findItem = formattedList.find(function(el) {
@@ -169,10 +172,6 @@ function(params) {
         };
     }
 
-    let selectedItems = {
-        list: []
-    };
-
     ko.bindingHandlers.dualItemList = this.initDualList('#' + this.dualSelectId, selectedItems);
 
     let initialStr = '';
@@ -183,13 +182,18 @@ function(params) {
             return el.id == selOpts[i];
         });
 
-        if (selOpts.length - 1 == i) {
-            initialStr += findItem['text'];
-        } else {
-            initialStr += findItem['text'] + ", ";
+        if (findItem) {
+            if (selOpts.length - 1 == i) {
+                initialStr += findItem['text'];
+            } else {
+                initialStr += findItem['text'] + ", ";
+            }
         }
     }
 
+    if (initialStr == '')
+        initialStr = 'Select Value';
+        
     this.displayStr(initialStr);
 
     this.acceptValue = function() {
@@ -197,6 +201,13 @@ function(params) {
         this.displayStr(values.str);
 
         this.selectedOptions(values.array);
+    }
+
+    this.initialDialog = function() {
+        if (initialIds.length > 1) {
+            jQuery('a[href='+ this.multiTabHref +']').click();
+            this.initialDialog = null;
+        }
     }
 }
 
