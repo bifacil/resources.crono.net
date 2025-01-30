@@ -161,7 +161,7 @@ components(Name='Bootstrap 3')
     components(name='Modals')
         component(name='modal',text='Modal', title='Title',type='',AutomaticId=YES)
             _button(type='button', [data-toggle]='modal', class='btn btn-primary', [data-target]=concat('#',@id), Text=@text, IsTargetForAttributes=YES)
-            div(class='modal fade', role='dialog', id=@id)
+            div(class='modal fade', [role]='dialog', id=@id)
                 div(class=if(type='','modal-dialog', concat('modal-dialog modal-',@type)))
                     div(Class='modal-content')
                         div(class='modal-header')
@@ -175,7 +175,7 @@ components(Name='Bootstrap 3')
         component(name='modal large',text='Modal', title='Title',id='') modal(text=@text,title=@title,type='lg',id=@id,IsTargetForAttributes=YES) [component content]
         component(name='modal ajax',text='Modal', title='Title',type='', ButtonType='primary', AutomaticId=YES, href='')
               _button(type='button', [data-toggle]='modal', class=$'btn btn-{@buttonType}', [data-target]=concat('#',@id), Text=@text)
-              div(class='modal fade', role='dialog', id=@id, [data-href]=@href)
+              div(class='modal fade', [role]='dialog', id=@id, [data-href]=@href)
                   div(class=if(type='','modal-dialog', concat('modal-dialog modal-',@type)))
                       div(Class='modal-content')
                           div(class='modal-header')
@@ -202,7 +202,7 @@ components(Name='Bootstrap 3')
               [data table](Data=@Data) [component content]
     
     components(name='Formularys')
-        component(name='formulary', action='') form(role='form', method='post', action=@action) [component content]
+        component(name='formulary', action='') form([role]='form', method='post', action=@action) [component content]
         component(name='form group') div(class='form-group') [component content]
         component(name='form label',Text='Title') _label(Text=@Text) 
         component(name='input text',text='label text',placeholder=NULL,VariableName=NULL,[Value]=NULL,IsDisabled=NO,IsReadOnly=NO) 
